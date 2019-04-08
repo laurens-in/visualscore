@@ -9,7 +9,7 @@ Get node and npm running, either by downloading it from <https://nodejs.org> or 
 brew install node
 ```
 
-Clone the repository
+Clone the repository and change directories.
 
 ```bash
 git clone https://github.com/laurens-in/CedricLuziusLaurens.git
