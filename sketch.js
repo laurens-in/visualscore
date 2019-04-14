@@ -2,6 +2,11 @@
 let socket;
 let friend;
 let friends;
+var gui;
+var localFader = 0;
+var localFaderMin = 0;
+var localFaderMax = 255;
+var remoteFader = 0;
 let touched = false;
 
 // send current drawing state
@@ -24,6 +29,7 @@ function friendFilter(masterList) {
 }
 
 function updateFriend(name, msg) {
+    remoteFader = msg.fader;
     friends[name] = msg;
 };
 
@@ -35,6 +41,11 @@ function friender() {
             stroke(index * 12, 255, 200);
             fill(index * 12, 255, 200, 127);
             ellipse(friends[name].x * windowWidth, friends[name].y * windowHeight, 5, 5);
+            translate(10, windowHeight/2);
+            fill(0,0,0,127);
+            rect(30, 20, 255, 55);
+            fill(index * 12, 255, 200, 127);
+            rect(30, 20, remoteFader, 55);
         }
     });
 }
@@ -82,6 +93,10 @@ function setup() {
     
     createCanvas(windowWidth, windowHeight);
     background(0, 0, 0);
+
+    // create the GUI
+    gui = createGui('client-gui');
+    gui.addGlobals('localFader');    
 }
 
 function draw() {
@@ -89,6 +104,7 @@ function draw() {
         friend.active = true;
         friend.x = mouseX / windowWidth;
         friend.y = mouseY / windowHeight;
+        friend.fader = localFader;
         sendIt();
         stroke(0, 255, 200);
         fill(0, 255, 200, 127);
