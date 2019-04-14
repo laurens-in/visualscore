@@ -99,15 +99,17 @@ function draw() {
     friender();
 }
 
-function touchStarted() {
-    touched = true;
-    return false;
-}
+// this interferes with p5-gui functionality, leave it disabled for now
+// function touchStarted() {
+//     touched = true;
+//     return false;
+// }
 
-function touchEnded() {
-    touched = false;
-    return false;
-}
+// this interferes with p5-gui functionality, leave it disabled for now
+// function touchEnded() {
+//     touched = false;
+//     return false;
+// }
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
