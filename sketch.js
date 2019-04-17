@@ -125,6 +125,7 @@ function draw() {
     fill(localFader);
     let size = map(pow(localFader/255, 3), 0, 1, 0, 505); 
     ellipse(windowWidth/2, windowHeight/2, size, size);
+    
     pop();
 }
 
