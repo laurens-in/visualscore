@@ -117,15 +117,7 @@ function draw() {
     push();
     noStroke();
     fill(abs(localFader - 255));
-    ellipse(windowWidth/2, windowHeight/2, localFader*2, localFader*2);
-    pop();
-
-    push();
-    noStroke();
-    fill(localFader);
-    let size = map(pow(localFader/255, 3), 0, 1, 0, 505); 
-    ellipse(windowWidth/2, windowHeight/2, size, size);
-    
+    ellipse(windowWidth/2, windowHeight/2, localFader, localFader);
     pop();
 }
 
