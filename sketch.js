@@ -112,19 +112,18 @@ function draw() {
     } else {
         friend.active = false;
     }
-    /*friender();*/
+    friender();
     background(localFader);
     push();
     noStroke();
     fill(abs(localFader - 255));
-    ellipse(windowWidth/2, windowHeight/2, localFader*3, localFader*3);
+    ellipse(windowWidth/2, windowHeight/2, localFader*2, localFader*2);
     pop();
 
     push();
     noStroke();
-    let color = map(pow(localFader/255, 2.5), 0, 1, 0, 255);
-    fill (color);
-    let size = map(pow(localFader/255, 3), 0, 1, 0, 815); 
+    fill(localFader);
+    let size = map(pow(localFader/255, 3), 0, 1, 0, 505); 
     ellipse(windowWidth/2, windowHeight/2, size, size);
     pop();
 }
