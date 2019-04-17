@@ -2,7 +2,7 @@
 let socket;
 let friend;
 let friends;
-let touched = false;
+let renderClick = true;
 
 // send current drawing state
 function sendIt() {
@@ -84,7 +84,7 @@ function setup() {
     background(0, 0, 0);
 }
 
-function draw() {
+/* function draw() {
     if (mouseIsPressed || touched) {
         friend.active = true;
         friend.x = mouseX / windowWidth;
@@ -97,7 +97,21 @@ function draw() {
         friend.active = false;
     }
     friender();
-}
+} */
+
+function draw() {
+    if (mouseIsPressed) {
+      if (renderClick) {
+          let color = random(255);
+          background(color);
+        }
+        renderClick = false;
+      }
+
+      else {
+        renderClick = true;
+    }
+  }
 
 // this interferes with p5-gui functionality, leave it disabled for now
 // function touchStarted() {
@@ -114,3 +128,4 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
