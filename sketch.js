@@ -92,10 +92,10 @@ function setup() {
     socket.connect();
     
     createCanvas(windowWidth, windowHeight);
-    background(0);
+    background(0, 0, 0);
 
     // create the GUI
-    gui = createGui('HalloLuzi');
+    gui = createGui('client-gui');
     gui.addGlobals('localFader');    
 }
 
@@ -113,12 +113,6 @@ function draw() {
         friend.active = false;
     }
     friender();
-    background(localFader);
-    push();
-    noStroke();
-    fill(abs(localFader - 255));
-    ellipse(windowWidth/2, windowHeight/2, localFader, localFader);
-    pop();
 }
 
 // this interferes with p5-gui functionality, leave it disabled for now
