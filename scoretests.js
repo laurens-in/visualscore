@@ -1,7 +1,7 @@
 let x_dist = 0;
 let y_dist = 0;
 let c_offset = 193;
-let x_div = 17;
+let x_div = 40;
 let y_div = 5;
 let renderClick = true;
 
@@ -16,7 +16,7 @@ function setup() {
 
 function draw() {
   if (mouseIsPressed) {
-    if (renderClick) {
+//    if (renderClick) {
       separator(y_dist);
       while (y_dist < windowHeight) {
         brick();
@@ -30,9 +30,9 @@ function draw() {
       }
       renderClick = false;
     }
-  } else {
-    renderClick = true;
-  }
+  // } else {
+  //   renderClick = true;
+  // }
 }
 
 function windowResized() {
@@ -43,23 +43,23 @@ function windowResized() {
 }
 
 separator = (y) => {
-  stroke(127);
-  line(0, y, windowWidth, y);
+//  stroke(127);
+//  line(0, y, windowWidth, y);
 }
 
 brick = () => {  
   let r = random();
-  let x = 25 + (x_baseWidth * r);
+  let x = 5 + (x_baseWidth * r);
   let c = wrap(c_offset + (1-r) * 64, 0, 255);
 
-  if (x < 42) {
-    fill(c, 242, random(20, 250), 128);
-    stroke(c, 242, random(0, 255));
+  if (x < 22) {
+    fill(c, 242, random(20, 250), 5);
+    stroke(c, 242, random(0, 255), 5);
   } else {
-    fill(0, 0, random(20, 230), 200);
+    fill(0, 0, random(0, 255), 10);
     noStroke();
   }
-  rect(x_dist, y_dist, x, y_baseHeight);
+  circle(x_dist, random(windowHeight), x, y_baseHeight);
   
   x_dist += x;
   if (x_dist >= windowWidth) {
