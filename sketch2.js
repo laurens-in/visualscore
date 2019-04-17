@@ -1,9 +1,7 @@
-
 let socket;
 let friend;
 let friends;
 let renderClick = true;
-
 // send current drawing state
 function sendIt() {
     if (friend.name != "FriendName") {
@@ -30,13 +28,15 @@ function updateFriend(name, msg) {
 // render friends onto canvas
 function friender() {
     Object.keys(friends).forEach(function (name) {
-        if (friends[name].active) {
-            let index = Object.keys(friends).indexOf(name) + 1;
-            stroke(index * 12, 255, 200);
-            fill(index * 12, 255, 200, 127);
-            ellipse(friends[name].x * windowWidth, friends[name].y * windowHeight, 5, 5);
-        }
-    });
+            let y = Object.keys(friends).length;
+            let xbit = windowWidth/y;
+            let color = friends[name].color;
+            let index = Object.keys(friends).indexOf(name);
+            fill(color);
+            //strokeWeight(random(30));
+            rect((xbit * index), 0, (xbit * (index + 1)), windowHeight); 
+            
+        });
 }
 
 function setup() {
@@ -100,24 +100,8 @@ function setup() {
 } */
 
 function draw() {
-    colorMode(HSB, 255);
-    if (mouseIsPressed) {
-      if (renderClick) {
-          friend.active = true;
-          friend.color = random(255);
-          sendIt();
-          fill(friend.color);
-          strokeWeight(130);
-          rect(0, 0, windowWidth, windowHeight);
-        }
-        renderClick = false;
-        friend.active = false;
-        sendIt(); 
-      }
-      else {
-        renderClick = true;
-    }
-  }
+    friender();
+}
 
 // this interferes with p5-gui functionality, leave it disabled for now
 // function touchStarted() {
