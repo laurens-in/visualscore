@@ -2,12 +2,15 @@
 let socket;
 let friend;
 let friends;
-var gui;
-var localFader = 0;
-var localFaderMin = 0;
-var localFaderMax = 255;
-var remoteFader = 0;
-let touched = false;
+let renderClick = true;
+let font,
+  fontsize;
+
+function preload() {
+  // Ensure the .ttf or .otf font stored in the assets directory
+  // is loaded before setup() and draw() are called
+  font = loadFont('assets/SourceSansPro-Regular.otf');
+}
 
 // send current drawing state
 function sendIt() {
@@ -29,7 +32,6 @@ function friendFilter(masterList) {
 }
 
 function updateFriend(name, msg) {
-    remoteFader = msg.fader;
     friends[name] = msg;
 };
 
@@ -41,11 +43,6 @@ function friender() {
             stroke(index * 12, 255, 200);
             fill(index * 12, 255, 200, 127);
             ellipse(friends[name].x * windowWidth, friends[name].y * windowHeight, 5, 5);
-            translate(10, windowHeight/2);
-            fill(0,0,0,127);
-            rect(30, 20, 255, 55);
-            fill(index * 12, 255, 200, 127);
-            rect(30, 20, remoteFader, 55);
         }
     });
 }
@@ -93,29 +90,43 @@ function setup() {
     socket.connect();
     
     createCanvas(windowWidth, windowHeight);
-    background(0, 0, 0);
 
-    // create the GUI
-    gui = createGui('client-gui');
-    gui.addGlobals('localFader');    
+    textFont(font);
+    textSize(fontsize);
+    textAlign(CENTER, CENTER);
+    background(0);
 }
 
 
 function draw() {
-    if (mouseIsPressed || touched) {
-        friend.active = true;
-        friend.x = mouseX / windowWidth;
-        friend.y = mouseY / windowHeight;
-        friend.fader = localFader;
-        sendIt();
-        stroke(0, 255, 200);
-        fill(0, 255, 200, 127);
-        ellipse(mouseX, mouseY, 5, 5);
-    } else {
+    fill(255 - friend.color);
+    text('tap screen', windowWidth * 0.5, windowHeight * 0.5);
+    colorMode(HSB, 255);
+    if (mouseIsPressed) {
+      if (renderClick) {
+          let chooser = [0, 255];
+          friend.active = true;
+          friend.color = random(255);
+          friend.randx = random();
+          friend.randx2 = (friend.randx + (random(0.25) - 0.5));
+          if (friend.color > 210) {
+              friend.sat = random(chooser);
+          }
+          else {
+              friend.sat = 0;
+          }
+          sendIt();
+          fill(friend.color, friend.sat, friend.color);
+          rect(0, 0, windowWidth, windowHeight);
+        }
+        renderClick = false;
         friend.active = false;
+        sendIt(); 
+      }
+      else {
+        renderClick = true;
     }
-    friender();
-}
+  }
 
 // this interferes with p5-gui functionality, leave it disabled for now
 // function touchStarted() {
