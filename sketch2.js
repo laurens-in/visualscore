@@ -2,6 +2,9 @@ let socket;
 let friend;
 let friends;
 let renderClick = true;
+let xbit;
+let ybit;
+let friendsCount;
 // send current drawing state
 function sendIt() {
     if (friend.name != "FriendName") {
@@ -27,17 +30,10 @@ function updateFriend(name, msg) {
 
 // render friends onto canvas
 function friender() {
-    Object.keys(friends).forEach(function (name) {
-            let y = Object.keys(friends).length;
-            let xbit = windowWidth/y;
-            let color = friends[name].color;
-            let index = Object.keys(friends).indexOf(name);
-            fill(color);
-            //strokeWeight(random(30));
-            rect((xbit * index), 0, (xbit * (index + 1)), windowHeight); 
-            
-        });
+    
+    
 }
+
 
 function setup() {
     colorMode(HSB, 255);
@@ -84,23 +80,61 @@ function setup() {
     background(0, 0, 0);
 }
 
-/* function draw() {
-    if (mouseIsPressed || touched) {
-        friend.active = true;
-        friend.x = mouseX / windowWidth;
-        friend.y = mouseY / windowHeight;
-        sendIt();
-        stroke(0, 255, 200);
-        fill(0, 255, 200, 127);
-        ellipse(mouseX, mouseY, 5, 5);
-    } else {
-        friend.active = false;
-    }
-    friender();
-} */
 
 function draw() {
-    friender();
+    background(0, 0, 0);
+    friendsCount = Object.keys(friends).length;
+    xbit = windowWidth/friendsCount;
+    ybit = windowHeight/friendsCount;
+    
+    let a = Object.keys(friends);
+    let i = 0;
+    // while (i < a.length) {
+    //     let color = friends[a[i]].color;
+    //     fill(color, (friends[a[i]].sat * 255), color, 255);
+    //     translate(xbit * i, ybit * i);
+    //     rect(0, 0, xbit, ybit);
+    //     i++;
+    // }
+    Object.keys(friends).forEach((name, index) => {
+        let color = friends[name].color;
+        // let index = Object.keys(friends).indexOf(name);
+        fill(color, (friends[name].sat * 255), color, 255);
+        //strokeWeight(random(30));
+        
+        rect((xbit * index), (ybit * index), xbit, ybit);
+
+        // translate(xbit * index, ybit * index);
+        // rect(0, 0, xbit , ybit);
+
+        // stroke(140);
+        //rect((friends[name].randx * (windowWidth)), 0, (friends[name].randx2 * (windowWidth)), windowHeight);  
+        
+    });
+
+    a1 = [
+        {x = 0, y = 0},
+        {x = 0, y = 0},
+        {x = 0, y = 0}
+    ];
+
+    a2 = [
+        {x = 0, y = 0},
+        {x = 0, y = 0},
+        {x = 0, y = 0}
+    ];
+
+    a2.length
+
+
+
+
+    // push();
+    // let hehe = wrap(frameCount * 1, 0, windowWidth);
+    // stroke(255);
+    // translate(hehe, 0, hehe, 0);
+    // line(0, 0, 0, windowHeight);
+    // pop();
 }
 
 // this interferes with p5-gui functionality, leave it disabled for now
@@ -119,3 +153,7 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 
+wrap = (inValue, inMin, inMax) => {
+    valueRange = inMax - inMin;
+    return (inMin + ((((inValue - inMin) % valueRange) + valueRange) % valueRange));
+}
