@@ -102,13 +102,13 @@ function draw() {
         fill(color, (friends[name].sat * 255), color, 255);
         //strokeWeight(random(30));
         
-        rect((xbit * index), (ybit * index), xbit, ybit);
+        //rect((xbit * index), (ybit * index), xbit, ybit);
 
         // translate(xbit * index, ybit * index);
         // rect(0, 0, xbit , ybit);
 
         // stroke(140);
-        //rect((friends[name].randx * (windowWidth)), 0, (friends[name].randx2 * (windowWidth)), windowHeight);  
+        rect((friends[name].randx * (windowWidth)), 0, (friends[name].randx2 * (windowWidth)), windowHeight);  
         
     });
 
