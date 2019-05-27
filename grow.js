@@ -145,7 +145,6 @@ function randomer() {
   if (hit) {
     randomGrow.push({x, y, r});
     s += 1.2;
-    r += 0.2;
   }
 
 }
@@ -155,7 +154,7 @@ function draw() {
 
     // noFill();
     beginShape();
-    fill(0);
+    fill(200, 100, 100);
     stroke(51);
     poly.forEach((vector) => {
       vertex(vector.x, vector.y);
@@ -168,9 +167,18 @@ function draw() {
       let x = randomGrow[i].x;
       let y = randomGrow[i].y;
       let r = randomGrow[i].r;
+      let xl = wrap(i - 1, 0, randomGrow.length);
       noStroke();
       fill(color, 175);
       ellipse(x, y, r);
+      push();
+      stroke(i);
+      line(x, y, randomGrow[xl].x, randomGrow[xl].y);
+      pop();
+      push();
+      stroke(i);
+      line(x, y, randomGrow[0].x, randomGrow[0].y);
+      pop();
     }
       //rect(randomGrow[i].x, randomGrow[i].y, (i + 10) * 2, (i + 10) * 2);
       //rect(randomGrow[i].x, randomGrow[i].y, ((i + 10) + random(5)) * 2, ((i + 10) + random(5)) * 2);
