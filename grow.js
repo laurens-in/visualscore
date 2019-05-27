@@ -93,7 +93,7 @@ let s = 5;
 var hit = false;
 var notBusy = true;
 let poly = Array();
-let r = 2;
+let r;
 
 /*function mouseClicked() {
   x = mouseX + random(-r, r);
@@ -139,6 +139,7 @@ function arrayAdder() {
 
 
 function randomer() {
+  r = 10;
   let x = mouseX + random(-s, s);
   let y = mouseY + random(-s, s);
   hit = collideCirclePoly(x, y, r, poly, true);
@@ -163,7 +164,7 @@ function draw() {
 
     arrayAdder();
     for (let i = 0; i < randomGrow.length; i += 1) {
-      let color = i + 65;
+      let color = i;
       let x = randomGrow[i].x;
       let y = randomGrow[i].y;
       let r = randomGrow[i].r;
@@ -172,11 +173,11 @@ function draw() {
       fill(color, 175);
       ellipse(x, y, r);
       push();
-      stroke(i);
+      stroke(i, 200, 50, 150);
       line(x, y, randomGrow[xl].x, randomGrow[xl].y);
       pop();
       push();
-      stroke(i);
+      stroke(i, 50, 200, 150);
       line(x, y, randomGrow[0].x, randomGrow[0].y);
       pop();
     }
