@@ -83,12 +83,21 @@ function setup() {
 
 function draw() {
     background(0, 0, 0);
+    push();
+    let hehe = wrap(frameCount * 1, 0, windowWidth);
+    stroke(255);
+    translate(hehe, 0, hehe, 0);
+    line(0, 0, 0, windowHeight);
+    pop(); 
+
     friendsCount = Object.keys(friends).length;
     xbit = windowWidth/friendsCount;
     ybit = windowHeight/friendsCount;
     
     let a = Object.keys(friends);
     let i = 0;
+
+
     // while (i < a.length) {
     //     let color = friends[a[i]].color;
     //     fill(color, (friends[a[i]].sat * 255), color, 255);
@@ -103,16 +112,17 @@ function draw() {
         //strokeWeight(random(30));
         
         //rect((xbit * index), (ybit * index), xbit, ybit);
+        rect((friends[name].randx * (windowWidth)), (ybit * index), (friends[name].randx2 * (windowWidth)), ybit);
 
         // translate(xbit * index, ybit * index);
         // rect(0, 0, xbit , ybit);
 
         // stroke(140);
-        rect((friends[name].randx * (windowWidth)), 0, (friends[name].randx2 * (windowWidth)), windowHeight);  
+        //rect((friends[name].randx * (windowWidth)), 0, (friends[name].randx2 * (windowWidth)), windowHeight);  
         
     });
 
-    a1 = [
+    /*a1 = [
         {x = 0, y = 0},
         {x = 0, y = 0},
         {x = 0, y = 0}
@@ -124,17 +134,12 @@ function draw() {
         {x = 0, y = 0}
     ];
 
-    a2.length
+    a2.length*/
 
 
 
 
-    // push();
-    // let hehe = wrap(frameCount * 1, 0, windowWidth);
-    // stroke(255);
-    // translate(hehe, 0, hehe, 0);
-    // line(0, 0, 0, windowHeight);
-    // pop();
+
 }
 
 // this interferes with p5-gui functionality, leave it disabled for now
