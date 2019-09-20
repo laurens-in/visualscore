@@ -178,7 +178,7 @@ function draw() {
       pop();
       push();
       stroke(i, 50, 200, 150);
-      line(x, y, randomGrow[0].x, randomGrow[0].y);
+      //line(x, y, randomGrow[0].x, randomGrow[0].y);
       pop();
     }
       //rect(randomGrow[i].x, randomGrow[i].y, (i + 10) * 2, (i + 10) * 2);

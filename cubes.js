@@ -30,8 +30,8 @@ function updateFriend(name, msg) {
 
 // render friends onto canvas
 function friender() {
-    
-    
+
+
 }
 
 
@@ -75,7 +75,7 @@ function setup() {
     });
 
     socket.connect();
-    
+
     createCanvas(windowWidth, windowHeight);
     background(0, 0, 0);
 }
@@ -83,17 +83,12 @@ function setup() {
 
 function draw() {
     background(0, 0, 0);
-    push();
-    let hehe = wrap(frameCount * 1, 0, windowWidth);
-    stroke(255);
-    translate(hehe, 0, hehe, 0);
-    line(0, 0, 0, windowHeight);
-    pop(); 
 
     friendsCount = Object.keys(friends).length;
     xbit = windowWidth/friendsCount;
-    ybit = windowHeight/friendsCount;
-    
+    //ybit = windowHeight/friendsCount;
+    ybit = windowHeight/3;
+
     let a = Object.keys(friends);
     let i = 0;
 
@@ -110,16 +105,18 @@ function draw() {
         // let index = Object.keys(friends).indexOf(name);
         fill(color, (friends[name].sat * 255), color, 255);
         //strokeWeight(random(30));
-        
+
         //rect((xbit * index), (ybit * index), xbit, ybit);
-        rect((friends[name].randx * (windowWidth)), (ybit * index), (friends[name].randx2 * (windowWidth)), ybit);
+        rect((friends[name].randx * (windowWidth)), (ybit * (index % 3)), (friends[name].randx2 * (windowWidth)), ybit);
 
         // translate(xbit * index, ybit * index);
         // rect(0, 0, xbit , ybit);
 
         // stroke(140);
-        //rect((friends[name].randx * (windowWidth)), 0, (friends[name].randx2 * (windowWidth)), windowHeight);  
-        
+        //rect((friends[name].randx * (windowWidth)), 0, (friends[name].randx2 * (windowWidth)), windowHeight);
+
+
+
     });
 
     /*a1 = [
@@ -136,8 +133,12 @@ function draw() {
 
     a2.length*/
 
-
-
+    push();
+    let hehe = wrap(frameCount * 1, 0, windowWidth);
+    stroke(255);
+    translate(hehe, 0, hehe, 0);
+    line(0, 0, 0, windowHeight);
+    pop();
 
 
 }
