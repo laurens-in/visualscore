@@ -50,7 +50,7 @@ function setup() {
         x: 0, y: 0, name: "FriendName", active: false
     };
 
-    // the array of connected clients
+    // the object??(array) of connected clients
     friends = {};
 
     socket = io('https://scroppy-club-dxdjyofhzo.now.sh');
