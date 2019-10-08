@@ -1,17 +1,10 @@
 let socket;
 let friend;
 let friends;
-let renderClick = true;
-let font,
-  fontsize;
 
-function preload() {
-  // Ensure the .ttf or .otf font stored in the assets directory
-  // is loaded before setup() and draw() are called
-  font = loadFont('assets/SourceSansPro-Regular.otf');
-}
+/////////////////////////////////////// SOCKET.IO RELATED FUNCTIONS EVENT-HANDLING //////////////////////////////////////////
 
-// send current drawing state
+// send friend object
 function sendIt() {
     if (friend.name != "FriendName") {
         socket.emit("friend-data", friend);
@@ -23,7 +16,7 @@ function sendFriend() {
 }
 
 function friendFilter(masterList) {
-    Object.keys(friends).forEach(function (name) {
+    Object.keys(friends).forEach((name) => {
         if (masterList.indexOf(name) === -1) {
             delete friends[name];
         }
@@ -34,7 +27,8 @@ function updateFriend(msg) {
     friends[msg.name] = msg;
 };
 
-////////////////////////////////////////// P5 - PRELOAD - DRAW - SETUP - RESIZE ///////////////////////////////////////////
+//////////////////////////////////////// P5 - PRELOAD - DRAW - SETUP - RESIZE /////////////////////////////////////////////
+let font;
 
 // is loaded once before setup() and draw() to get assets
 function preload() {
@@ -43,6 +37,7 @@ function preload() {
 
 // Setup function called once on page load, initializes everything
 function setup() {
+
     colorMode(HSB, 255);
 
     // prototype object for representing current state
@@ -71,13 +66,13 @@ function setup() {
         console.log("We shall call you " + msg);
     });
 
-    // handler for receiving "online-users messages from socket"
-    socket.on("online-users", function (count) {
-        // console.log(count.toString());
+    // handler for receiving "online-users" messages from socket
+    socket.on("online-users", (count) => {
+        console.log(count.toString());
     });
 
     // handler for receiving "friend-list" messages from socket
-    socket.on("friend-list", (msg)=>{
+    socket.on("friend-list", (msg) => {
         friendFilter(msg);
     });
 
@@ -90,8 +85,16 @@ function setup() {
 
 function draw() {
 
+  if (currentPart == 1){
+    //do some stuff e.g. cubes();
+  } else if (currentPart == 2){
+    //do some other stuff
   }
+
+}
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+
+////////////////////////////////////////////// FUNCTIONS FOR SKETCHES //////////////////////////////////////////////////////
