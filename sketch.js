@@ -91,13 +91,13 @@ function setup() {
     });
 
     socket.connect();
-    
+
     createCanvas(windowWidth, windowHeight);
     background(0, 0, 0);
 
     // create the GUI
     gui = createGui('client-gui');
-    gui.addGlobals('localFader');    
+    gui.addGlobals('localFader');
 }
 
 

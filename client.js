@@ -99,6 +99,8 @@ function draw() {
   // } else if (currentPart == 2){
   //   //do some other stuff
   // }
+  fill(100)
+  ellipse(mouseX, mouseY, 30);
 
   showName();
 
