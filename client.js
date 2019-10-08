@@ -31,6 +31,11 @@ function updateFriend(msg) {
 //////////////////////////////////////// P5 - PRELOAD - DRAW - SETUP - RESIZE /////////////////////////////////////////////
 let font;
 
+//prevent mobile browser from scrolling
+function touchMoved(){
+  return false;
+}
+
 // is loaded once before setup() and draw() to get assets
 function preload() {
   font = loadFont('assets/SourceSansPro-Regular.otf');
