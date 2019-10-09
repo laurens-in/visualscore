@@ -126,6 +126,8 @@ function showName() {
     nameRender.fill(0);
     nameRender.textSize(32);
     nameRender.text(friend.name, 0, 32);
+    nameRender.textSize(20);
+    nameRender.text('status: online', 0, 52)
     image(nameRender, 0, 0);
   }
 }
