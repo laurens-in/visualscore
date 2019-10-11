@@ -1,7 +1,6 @@
 let socket;
 let friend;
 let friends;
-let nameRender;
 
 /////////////////////////////////////// SOCKET.IO RELATED FUNCTIONS EVENT-HANDLING //////////////////////////////////////////
 
@@ -87,8 +86,11 @@ function setup() {
 
     createCanvas(windowWidth, windowHeight);
 
-    nameRender = createGraphics(500, 100);
-    nameRender.clear();
+    //showName() canvas setup
+    nameRenderOnline = createGraphics(windowWidth, windowHeight);
+    nameRenderOnline.clear();
+    nameRenderOffline = createGraphics(windowWidth, windowHeight);
+    nameRenderOffline.clear();
 }
 
 
@@ -99,8 +101,6 @@ function draw() {
   // } else if (currentPart == 2){
   //   //do some other stuff
   // }
-  fill(100)
-  ellipse(mouseX, mouseY, 30);
 
   showName();
 
@@ -112,22 +112,33 @@ function windowResized() {
 
 ////////////////////////////////////////////// FUNCTIONS FOR SKETCHES //////////////////////////////////////////////////////
 
+////////////// SHOW NAME ////////////////
+
+let nameRenderOnline;
+let nameRenderOffline;
+
 function showName() {
   if (friend.name == 'FriendName'){
-    nameRender.clear();
-    nameRender.stroke(255);
-    nameRender.fill(0);
-    nameRender.textSize(32);
-    nameRender.text('waiting for connection', 0, 32);
-    image(nameRender, 0, 0);
+    nameRenderOffline.clear();
+    nameRenderOffline.stroke(255);
+    nameRenderOffline.fill(0);
+    nameRenderOffline.textSize(32);
+    nameRenderOffline.text('waiting for connection', 0, 32);
+    nameRenderOffline.ellipse(windowWidth/2, windowHeight/2, frameCount * 2 + 200);
+    image(nameRenderOffline, 0, 0);
   } else {
-    nameRender.clear();
-    nameRender.stroke(255);
-    nameRender.fill(0);
-    nameRender.textSize(32);
-    nameRender.text(friend.name, 0, 32);
-    nameRender.textSize(20);
-    nameRender.text('status: online', 0, 52)
-    image(nameRender, 0, 0);
+    nameRenderOnline.background(0, 25);
+    nameRenderOnline.stroke(255);
+    nameRenderOnline.fill(255);
+    nameRenderOnline.textSize(32);
+    nameRenderOnline.text(friend.name, 0, 32);
+    nameRenderOnline.textSize(20);
+    nameRenderOnline.text('status: online', 0, 52)
+
+    nameRenderOnline.noStroke();
+    nameRenderOnline.fill(100)
+    nameRenderOnline.ellipse(mouseX, mouseY, 15);
+
+    image(nameRenderOnline, 0, 0);
   }
 }
