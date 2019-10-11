@@ -128,8 +128,8 @@ function showName() {
     image(nameRenderOffline, 0, 0);
   } else {
     nameRenderOnline.background(0, 25);
-    nameRenderOnline.stroke(255);
-    nameRenderOnline.fill(255);
+    nameRenderOnline.noStroke();
+    nameRenderOnline.fill(10, 255, 10);
     nameRenderOnline.textSize(32);
     nameRenderOnline.text(friend.name, 0, 32);
     nameRenderOnline.textSize(20);
