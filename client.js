@@ -120,24 +120,32 @@ let nameRenderOffline;
 function showName() {
   if (friend.name == 'FriendName'){
     nameRenderOffline.clear();
+    nameRenderOffline.ellipse(windowWidth/2, windowHeight/2, frameCount * 2 + 200);
     nameRenderOffline.stroke(255);
     nameRenderOffline.fill(0);
     nameRenderOffline.textSize(32);
     nameRenderOffline.text('waiting for connection', 0, 32);
-    nameRenderOffline.ellipse(windowWidth/2, windowHeight/2, frameCount * 2 + 200);
+
     image(nameRenderOffline, 0, 0);
   } else {
+
+    let d = new Date();
+    let currentTime = d.toLocaleTimeString();
+    let randX = random(windowWidth);
+    let randY = random(windowHeight);
+
     nameRenderOnline.background(0, 25);
     nameRenderOnline.noStroke();
     nameRenderOnline.fill(10, 255, 10);
     nameRenderOnline.textSize(32);
     nameRenderOnline.text(friend.name, 0, 32);
     nameRenderOnline.textSize(20);
-    nameRenderOnline.text('status: online', 0, 52)
+    nameRenderOnline.text('status: online\n' + currentTime, 0, 52)
 
     nameRenderOnline.noStroke();
-    nameRenderOnline.fill(100)
-    nameRenderOnline.ellipse(mouseX, mouseY, 15);
+    nameRenderOnline.fill(0, 255, 0);
+    nameRenderOnline.text('1', random(windowWidth), random(windowHeight));
+    nameRenderOnline.text('0', random(windowWidth), random(windowHeight));
 
     image(nameRenderOnline, 0, 0);
   }
