@@ -1,5 +1,6 @@
 const io = require('socket.io-client');
-socket = io('http://localhost:5001');
+const socket = io('http://cedricluziuslaurens.laurenshwm.now.sh:5001');
+// socket = io('http://localhost:5001');
 
 // REGISTERED EVENTS:
 //
