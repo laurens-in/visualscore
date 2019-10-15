@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "rm -r public; mkdir public; touch public/index.html",
+    "start": "node server.js",
+    "run": "node server.js"
   },
   "author": "Cedric Spindler",
   "license": "ISC",
