@@ -44,7 +44,7 @@ function setup() {
         x: 0, y: 0, name: "FriendName", active: false
     };
 
-    // the object??(array) of connected clients
+    // collection of connected clients
     friends = {};
 
     socket = io('https://scroppy-club-dxdjyofhzo.now.sh');
@@ -90,6 +90,7 @@ function setup() {
 
 
 function draw() {
+  background(0);
   //clear();
   // if (currentPart == 1){
   //   //do some stuff e.g. cubes();
@@ -98,7 +99,8 @@ function draw() {
   // }
 
   showName();
-  makeCube();
+  //makeCube();
+  clientSettingA();
 
 }
 
@@ -134,49 +136,98 @@ let nameRenderOffline;
 function showName() {
   if (friend.name == 'FriendName'){
     nameRenderOffline.clear();
+    nameRenderOffline.background(255);
     nameRenderOffline.ellipse(windowWidth/2, windowHeight/2, frameCount * 2 + 200);
     nameRenderOffline.stroke(255);
     nameRenderOffline.fill(0);
-    nameRenderOffline.textSize(32);
-    nameRenderOffline.text('waiting for connection', 0, 32);
+    nameRenderOffline.textSize(20);
+    nameRenderOffline.textAlign(LEFT, TOP);
+    nameRenderOffline.text('waiting for connection', 10, 10);
 
     image(nameRenderOffline, 0, 0);
   } else {
 
     let d = new Date();
     let currentTime = d.toLocaleTimeString();
-    let randX = random(windowWidth);
-    let randY = random(windowHeight);
-
-    nameRenderOnline.background(0, 25);
+    nameRenderOnline.clear();
     nameRenderOnline.noStroke();
     nameRenderOnline.fill(10, 255, 10);
-    nameRenderOnline.textSize(32);
-    nameRenderOnline.text(friend.name, 0, 32);
+    nameRenderOnline.textAlign(LEFT, TOP);
     nameRenderOnline.textSize(20);
-    nameRenderOnline.text('status: online\n' + currentTime, 0, 52)
-
-    nameRenderOnline.noStroke();
-    nameRenderOnline.fill(0, 255, 0);
-    nameRenderOnline.text('1', random(windowWidth), random(windowHeight));
-    nameRenderOnline.text('0', random(windowWidth), random(windowHeight));
-
+    nameRenderOnline.text(friend.name + '\nstatus: online\n' + currentTime, 10, 10)
     image(nameRenderOnline, 0, 0);
   }
 }
 
 ///////////// GENERATE CUBES //////////////
 
-let cube = {};
-let i = 0;
+let cube = {
+  positionX: 0,
+  positionY: 0,
+  width: 0,
+  line: 0,
+  x: 0,
+  color: [0, 255, 0],
+  opacity: 125,
+  active: false
+};
 
-function makeCube(){
-  if (touched) {
-    i += 10
-    fill(0, 255, 0);
-    rect(0, 150, i, windowHeight);
-    console.log('im doing it');
+let growsize = 0;
+let timeTouched = 0;
+
+function clientSettingA() {
+  if(touched){
+
+    // grow stuff
+
+    if (growsize == 0){
+      cube.positionX = mouseX;
+      cube.positionY = mouseY;
+    }
+    growsize += 2;
+    cube.width = growsize;
+    cube.x = cube.positionX - growsize/2;
+
+    fill([... cube.color, cube.opacity]);
+    rect(cube.x, (windowHeight / 2) - (windowHeight/3), cube.width, (windowHeight/3) * 2)
+
+    // opacity stuff
+
+    if(mouseX < cube.positionX){
+      let swipe = cube.positionX - mouseX;
+      cube.opacity = map(swipe, 0, cube.positionX, 125, 0);
+
+    } else if (mouseX > cube.positionX) {
+      let swipe = mouseX - cube.positionX;
+      cube.opacity = map(swipe, 0, windowWidth - cube.positionX, 125, 255);
+    } else {
+      timeTouched++;
+      if (timeTouched > 200 && timeTouched < 2000){
+        textAlign(RIGHT, TOP);
+        fill(0, 255, 0);
+        textSize(20);
+        text('you can move your finger, ' + friend.name.toLowerCase() +'!', windowWidth-10, 10);
+      }
+    }
+
+    // color stuff
+
+    if(mouseY < cube.positionY){
+      let swipe = cube.positionY - mouseY;
+      cube.color[1] = map(swipe, 0, cube.positionY, 255, 0);
+      cube.color[0] = map(swipe, 0, cube.positionY, 0, 255);
+
+    } else if (mouseY > cube.positionY) {
+      let swipe = mouseY - cube.positionY;
+      cube.color[1] = map(swipe, 0, windowHeight - cube.positionY, 255, 0);
+      cube.color[2] = map(swipe, 0, windowHeight - cube.positionY, 0, 255);
+    }
+    console.log(cube.color);
+
+
   } else {
-    i = 0;
+    timeTouched = 0;
+    growsize = 0;
   }
+
 }
