@@ -9,6 +9,14 @@ const metal = require('metal-name');
 
 let onlineUsers = [];
 
+// REGISTERED EVENTS:
+//
+// friend-data (in/out)
+// cube-data (in)
+// name-assignment (out)
+// online-users (out)
+// friend-list (out)
+
 // connection listener
 io.on('connection', socket => {
   // socket is an event
@@ -44,6 +52,13 @@ io.on('connection', socket => {
 	// pass along all the incoming messages to everyone
 	socket.on('friend-data', (msg) => {
 		socket.broadcast.emit('friend-data', msg);
+  });
+
+  socket.on('cube-data', data => {
+    // need way to identify sender
+    // store / update incoming data
+    console.log('incoming cube data:');
+    console.dir(data);
   });
 
 	// client disconnection handler

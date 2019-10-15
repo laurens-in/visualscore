@@ -4,10 +4,11 @@ socket = io('http://localhost:5001');
 // REGISTERED EVENTS:
 //
 // connect
-// friend-data
-// name-assignment
-// online-users
-// friend-list
+// friend-data (in/out)
+// cube-data (out)
+// name-assignment (in)
+// online-users (in)
+// friend-list (in)
 
 socket.on('connect', () => {
   console.log('connection: ' + socket.connected);
