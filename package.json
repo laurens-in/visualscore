@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cp -rp server public; cd public; npm install"
+    "build": "cd server && npm install && cd .. && now server && now alias"
   },
   "author": "Cedric Spindler",
   "license": "ISC",
