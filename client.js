@@ -90,7 +90,7 @@ function setup() {
 
 
 function draw() {
-  clear();
+  //clear();
   // if (currentPart == 1){
   //   //do some stuff e.g. cubes();
   // } else if (currentPart == 2){
