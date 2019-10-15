@@ -30,11 +30,6 @@ function updateFriend(msg) {
 //////////////////////////////////////// P5 - PRELOAD - DRAW - SETUP - RESIZE /////////////////////////////////////////////
 let font;
 
-//prevent mobile browser from scrolling
-function touchMoved(){
-  return false;
-}
-
 // is loaded once before setup() and draw() to get assets
 function preload() {
   font = loadFont('assets/SourceSansPro-Regular.otf');
@@ -103,11 +98,30 @@ function draw() {
   // }
 
   showName();
+  makeCube();
 
 }
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+
+// handling "the touching"
+let touched;
+
+//prevent mobile browser from scrolling
+function touchMoved(){
+  return false;
+}
+
+function touchStarted() {
+    touched = true;
+    return false;
+}
+
+function touchEnded() {
+    touched = false;
+    return false;
 }
 
 ////////////////////////////////////////////// FUNCTIONS FOR SKETCHES //////////////////////////////////////////////////////
@@ -148,5 +162,21 @@ function showName() {
     nameRenderOnline.text('0', random(windowWidth), random(windowHeight));
 
     image(nameRenderOnline, 0, 0);
+  }
+}
+
+///////////// GENERATE CUBES //////////////
+
+let cube = {};
+let i = 0;
+
+function makeCube(){
+  if (touched) {
+    i += 10
+    fill(0, 255, 0);
+    rect(0, 150, i, windowHeight);
+    console.log('im doing it');
+  } else {
+    i = 0;
   }
 }
