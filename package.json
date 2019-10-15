@@ -5,16 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -r public; mkdir public; touch public/index.html",
-    "start": "node server.js",
-    "run": "node server.js"
+    "build": "cd server && npm install",
+    "deploy": "now ./server && now alias"
   },
   "author": "Cedric Spindler",
   "license": "ISC",
   "dependencies": {
     "p5": "^0.7.3",
-    "metal-name": "^1.3.0",
-    "socket.io": "^2.1.1",
     "socket.io-client": "^2.2.0"
   }
 }
