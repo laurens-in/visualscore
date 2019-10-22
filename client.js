@@ -80,6 +80,7 @@ function setup() {
     ////////////////// P5 SETUP ///////////////////
 
     createCanvas(windowWidth, windowHeight);
+    rectMode(CENTER);
 
     //showName() canvas setup
     nameRenderOnline = createGraphics(windowWidth, windowHeight);
@@ -180,36 +181,31 @@ function clientSettingA() {
   if(touched){
 
     // grow stuff
-
-
-    rectMode(CENTER);
-
     if (growsize == 0){
-      noStroke();
-      fill(0, 0);
+      cube.width = 0;
       cube.positionX = mouseX;
 
     } else {
-      stroke(255);
-      fill([... cube.color, cube.opacity]);
       cube.width = growsize / windowWidth;
     }
 
-    growsize += 2;
+    //growsize += 2;
 
     cube.x = cube.positionX - growsize/2;
+    let withinBounds = cube.x <= 20 || cube.positionX + growsize/2 >= windowWidth - 20;
 
-    console.log(cube.width);
-
+    if (!withinBounds){
+      growsize += 2;
+    } else {
+      growsize += 1;
+    }
     if (cube.x <= 20 && cube.positionX + growsize/2 >= windowWidth - 20){
       growsize -= 2;
     } else if (cube.x < 20){
       cube.positionX += 1;
       cube.x = 20;
-      console.log(cube.x);
     } else if (cube.positionX + growsize/2 > windowWidth - 20){
       cube.positionX -= 1;
-      console.log('lol i am so big');
     }
 
     // opacity stuff
@@ -246,11 +242,13 @@ function clientSettingA() {
 
 
   } else {
-    lastGrow = growsize;
     timeTouched = 0;
     growsize = 0;
   }
-  rect(cube.positionX, (windowHeight / 2), cube.width * windowWidth, (windowHeight/3));
+
+  stroke(255);
+  fill([... cube.color, cube.opacity]);
+  rect(cube.positionX, (windowHeight / 2), cube.width * windowWidth, (windowHeight/2));
 
 }
 
