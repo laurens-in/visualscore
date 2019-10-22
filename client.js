@@ -47,7 +47,8 @@ function setup() {
     // collection of connected clients
     friends = {};
 
-    socket = io('https://cedricluziuslaurens.laurenshwm.now.sh');
+    // socket = io('https://cedricluziuslaurens.laurenshwm.now.sh');
+    socket = io('http://localhost:5001');
 
     // handler for receiving "friend-data" messages from socket
     socket.on("friend-data", (msg) => {
