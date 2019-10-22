@@ -47,7 +47,7 @@ function setup() {
     // collection of connected clients
     friends = {};
 
-    socket = io('https://scroppy-club-dxdjyofhzo.now.sh');
+    socket = io('https://cedricluziuslaurens.laurenshwm.now.sh');
 
     // handler for receiving "friend-data" messages from socket
     socket.on("friend-data", (msg) => {
@@ -175,21 +175,42 @@ let cube = {
 let growsize = 0;
 let timeTouched = 0;
 
+
 function clientSettingA() {
   if(touched){
 
     // grow stuff
 
+
+    rectMode(CENTER);
+
     if (growsize == 0){
+      noStroke();
+      fill(0, 0);
       cube.positionX = mouseX;
-      cube.positionY = mouseY;
+
+    } else {
+      stroke(255);
+      fill([... cube.color, cube.opacity]);
+      cube.width = growsize / windowWidth;
     }
+
     growsize += 2;
-    cube.width = growsize;
+
     cube.x = cube.positionX - growsize/2;
 
-    fill([... cube.color, cube.opacity]);
-    rect(cube.x, (windowHeight / 2) - (windowHeight/3), cube.width, (windowHeight/3) * 2)
+    console.log(cube.width);
+
+    if (cube.x <= 20 && cube.positionX + growsize/2 >= windowWidth - 20){
+      growsize -= 2;
+    } else if (cube.x < 20){
+      cube.positionX += 1;
+      cube.x = 20;
+      console.log(cube.x);
+    } else if (cube.positionX + growsize/2 > windowWidth - 20){
+      cube.positionX -= 1;
+      console.log('lol i am so big');
+    }
 
     // opacity stuff
 
@@ -222,12 +243,14 @@ function clientSettingA() {
       cube.color[1] = map(swipe, 0, windowHeight - cube.positionY, 255, 0);
       cube.color[2] = map(swipe, 0, windowHeight - cube.positionY, 0, 255);
     }
-    console.log(cube.color);
 
 
   } else {
+    lastGrow = growsize;
     timeTouched = 0;
     growsize = 0;
   }
+  rect(cube.positionX, (windowHeight / 2), cube.width * windowWidth, (windowHeight/3));
 
 }
+
