@@ -82,6 +82,7 @@ function setup() {
 
     createCanvas(windowWidth, windowHeight);
     rectMode(CENTER);
+    stroke(0, 0);
 
     //showName() canvas setup
     nameRenderOnline = createGraphics(windowWidth, windowHeight);
@@ -206,7 +207,7 @@ function clientSettingA() {
       cube.positionX += 1;
       cube.x = 20;
     } else if (cube.positionX + growsize/2 > windowWidth - 20){
-      cube.positionX -= 1;
+      cube.positionX -= 0.5;
     }
 
     // opacity stuff
@@ -222,6 +223,7 @@ function clientSettingA() {
       timeTouched++;
       if (timeTouched > 200 && timeTouched < 2000){
         textAlign(RIGHT, TOP);
+        noStroke();
         fill(0, 255, 0);
         textSize(20);
         text('you can move your finger, ' + friend.name.toLowerCase() +'!', windowWidth-10, 10);
@@ -246,10 +248,11 @@ function clientSettingA() {
     timeTouched = 0;
     growsize = 0;
   }
-
+  if (cube.width > 0){
   stroke(255);
   fill([... cube.color, cube.opacity]);
   rect(cube.positionX, (windowHeight / 2), cube.width * windowWidth, (windowHeight/2));
+  }
 
 }
 
